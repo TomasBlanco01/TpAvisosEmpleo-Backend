@@ -2,7 +2,7 @@ const express = require('express');
 const cors = require('cors');
 require('dotenv').config();
 
-const anunciosRoutes = require('./routes/anuncios');
+const avisosRoutes = require('./routes/avisos');
 const empresasRoutes = require('./routes/empresas');
 
 const app = express();
@@ -10,7 +10,11 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-app.use('/api/anuncios', anunciosRoutes);
+app.get('/', (req, res) => {
+  res.send('API de Avisos de Empleo funcionando 🚀');
+});
+
+app.use('/api/avisos', avisosRoutes);
 app.use('/api/empresas', empresasRoutes);
 
 const PORT = process.env.PORT || 3000;
