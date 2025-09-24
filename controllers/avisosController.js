@@ -88,4 +88,12 @@ const createAviso = async (req, res) => {
   }
 };
 
-module.exports = { getAvisos, getAvisoById, createAviso };
+const deleteAviso = async (req, res) => {
+  try {
+    const result = await pool.query('DELETE FROM avisos WHERE id = $1 RETURNING *', [req.params.id]);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Error al eliminar aviso" });
+  }};
+
+module.exports = { getAvisos, getAvisoById, createAviso, deleteAviso };
