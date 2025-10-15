@@ -1,4 +1,4 @@
-const pool = require('../db/connection');
+import pool from '../db/connection.js';
 
 const getAvisos = async (req, res) => {
   try {
@@ -90,4 +90,4 @@ const deleteAviso = async (req, res) => {
     res.status(500).json({ message: "Error al eliminar aviso" });
   }};
 
-module.exports = { getAvisos, getAvisoById, createAviso, deleteAviso };
+export { getAvisos, getAvisoById, createAviso, deleteAviso };

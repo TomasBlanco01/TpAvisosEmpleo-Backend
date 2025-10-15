@@ -1,4 +1,4 @@
-const pool = require('../db/connection');
+import pool from '../db/connection.js';
 
 const getEmpresas = async (req, res) => {
   try {
@@ -25,4 +25,4 @@ const createEmpresa = async (req, res) => {
   }
 };
 
-module.exports = { getEmpresas, createEmpresa };
+export { getEmpresas, createEmpresa };
