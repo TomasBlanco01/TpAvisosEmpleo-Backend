@@ -14,8 +14,13 @@ app.get('/', (req, res) => {
   res.send('API de Avisos de Empleo funcionando 🚀');
 });
 
+app.use('/avisos', avisosRoutes);
+app.use('/empresas', empresasRoutes);
+
+/* LOCAL ROUTES
 app.use('/api/avisos', avisosRoutes);
 app.use('/api/empresas', empresasRoutes);
+*/
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {

@@ -1,6 +1,5 @@
 const pool = require('../db/connection');
 
-// Listar avisos con empresa
 const getAvisos = async (req, res) => {
   try {
     const { ubicacion, tipo_contrato } = req.query;
@@ -33,7 +32,6 @@ const getAvisos = async (req, res) => {
   }
 };
 
-// Detalle de aviso
 const getAvisoById = async (req, res) => {
   try {
     const result = await pool.query(`
@@ -54,17 +52,14 @@ const getAvisoById = async (req, res) => {
   }
 };
 
-// Crear aviso y empresa si no existe
 const createAviso = async (req, res) => {
   const { titulo, descripcion, ubicacion, tipo_contrato, empresa } = req.body;
 
   try {
-    // Buscar empresa existente
     let empresaResult = await pool.query('SELECT id FROM empresas WHERE nombre = $1', [empresa.nombre]);
     let empresaId;
 
     if (empresaResult.rows.length === 0) {
-      // Crear empresa nueva
       const newEmpresa = await pool.query(
         'INSERT INTO empresas (nombre, email, descripcion) VALUES ($1, $2, $3) RETURNING id',
         [empresa.nombre, empresa.email || null, empresa.descripcion || null]
@@ -74,7 +69,6 @@ const createAviso = async (req, res) => {
       empresaId = empresaResult.rows[0].id;
     }
 
-    // Crear aviso
     const newAviso = await pool.query(
       `INSERT INTO avisos (titulo, descripcion, ubicacion, tipo_contrato, empresa_id)
        VALUES ($1, $2, $3, $4, $5) RETURNING *`,
